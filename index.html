@@ -6,12 +6,14 @@
   <title>Ishimwe Kevin — Portfolio</title>
   <style>
     :root{
-      --bg:#0a0f2d; /* very dark blue */
-      --accent:#2ecc71;
-      --text:#f5f5f5;
-      --muted:#a3bfa8;
+      --bg:#0d1b2a; 
+      --bg-light:#1b263b;
+      --accent:#00b4d8;
+      --text:#e0e1dd;
+      --muted:#adb5bd;
+      --card-bg:#1e2e47;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
+    *{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth;}
     body{
       font-family: 'Segoe UI', Arial, sans-serif;
       background:var(--bg);
@@ -29,22 +31,23 @@
       top:0;
       width:100%;
       z-index:10;
-      background:rgba(10,15,45,0.95);
+      background:rgba(13,27,42,0.95);
+      backdrop-filter: blur(8px);
     }
     header .logo img{
       width:180px;
       height:180px;
       border-radius:50%;
       object-fit:cover;
-      border:2px solid var(--accent);
+      border:3px solid var(--accent);
+      box-shadow:0 0 12px rgba(0,180,216,0.6);
     }
     nav{
       display:flex;
       align-items:center;
-      flex-wrap:wrap;
+      gap:16px;
     }
     nav a{
-      margin-left:18px;
       text-decoration:none;
       color:var(--text);
       font-size:15px;
@@ -53,13 +56,14 @@
     nav a:hover{color:var(--accent)}
     .contact-btn{
       background:var(--accent);
-      color:var(--bg);
+      color:#fff;
       padding:7px 14px;
       border-radius:6px;
       font-weight:600;
-      margin-left:18px;
       white-space:nowrap;
+      transition:0.3s;
     }
+    .contact-btn:hover{background:#0096c7;}
 
     /* Hero */
     .hero{
@@ -68,51 +72,84 @@
       justify-content:space-between;
       padding:0 8%;
       min-height:100vh;
-      background:linear-gradient(90deg,rgba(10,15,45,0.95) 60%, transparent),
+      background:linear-gradient(120deg, var(--bg) 45%, transparent),
                  url('pic.jpg') right/cover no-repeat;
     }
-    .hero-text{max-width:500px;}
+    .hero-text{max-width:520px;}
     .hero-text h4{
       color:var(--accent);
       letter-spacing:2px;
-      font-size:14px;
+      font-size:15px;
       margin-bottom:10px;
     }
     .hero-text h1{
-      font-size:42px;
+      font-size:44px;
       line-height:1.2;
       margin-bottom:20px;
     }
     .hero-text p{
       color:var(--muted);
       margin-bottom:20px;
-      font-size:15px;
+      font-size:16px;
     }
     .hero-text .btn{
       display:inline-block;
       background:var(--accent);
-      color:var(--bg);
-      padding:10px 20px;
+      color:#fff;
+      padding:10px 22px;
       border-radius:6px;
       font-weight:600;
       text-decoration:none;
+      transition:0.3s;
     }
+    .hero-text .btn:hover{background:#0096c7;}
 
     /* Sections */
-    section{padding:60px 8%;}
-    .about,.skills,.contact{margin-top:40px;}
-    h2{margin-bottom:20px;color:var(--accent);}
+    section{
+      padding:100px 8% 70px; /* extra top padding for header offset */
+      scroll-margin-top:120px; /* fix nav overlap */
+    }
+    h2{
+      margin-bottom:25px;
+      color:var(--accent);
+      font-size:26px;
+      border-bottom:2px solid var(--accent);
+      display:inline-block;
+      padding-bottom:6px;
+    }
+
     .skills-list{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
+      gap:12px;
     }
     .skill{
-      background:rgba(255,255,255,0.05);
-      padding:10px 14px;
+      background:var(--card-bg);
+      padding:10px 16px;
       border-radius:8px;
       font-size:14px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
     }
+
+    /* Projects */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:20px;
+    }
+    .project-card{
+      background:var(--card-bg);
+      padding:20px;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 6px 20px rgba(0,0,0,0.4);
+    }
+    .project-card h3{margin-bottom:12px; color:#fff;}
+    .project-card p{color:var(--muted); font-size:15px;}
 
     /* Footer */
     footer{
@@ -120,25 +157,21 @@
       padding:20px 8%;
       color:var(--muted);
       font-size:13px;
+      background:var(--bg-light);
     }
 
-    /* ===== RESPONSIVENESS ===== */
+    /* Responsive */
     @media(max-width: 900px){
-      .hero{flex-direction:column; text-align:center; padding-top:100px;}
+      .hero{flex-direction:column; text-align:center; padding-top:200px;}
       .hero-text{max-width:100%;}
+      nav{flex-wrap:wrap; gap:10px; justify-content:center;}
     }
-    @media(max-width: 700px){
-      header{flex-direction:column; align-items:flex-start;}
-      nav{margin-top:10px; flex-wrap:wrap;}
-      nav a, .contact-btn{margin:8px 8px 0 0; font-size:14px;}
-    }
-    @media(max-width: 500px){
-      .hero-text h1{font-size:28px;}
+    @media(max-width: 600px){
+      .hero-text h1{font-size:32px;}
       .hero-text p{font-size:14px;}
-      header .logo img{width:90px; height:90px;}
-      section{padding:40px 6%;}
-      .skills-list{gap:8px;}
-      .skill{font-size:13px; padding:8px 12px;}
+      header .logo img{width:120px; height:120px;}
+      section{padding:80px 6% 50px;}
+      .projects-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -151,6 +184,7 @@
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
     <a href="ISHIMWE KEVIN CV.pdf" class="contact-btn" download>Download CV</a>
   </nav>
@@ -158,9 +192,9 @@
 
   <section class="hero" id="home">
     <div class="hero-text"><br><br><br>
-      <h4>CREATIVE IT STUDENT</h4>
+      <h4>NETWORK ENGINEER (IT STUDENT)</h4>
       <h1>I'm <br> Ishimwe Kevin</h1>
-      <p>Network Engineer & IT student At Adventist University Of Central Africa (AUCA) specializing in Network Communication Systems. Passionate about networking, Web Application, and innovative technology projects.</p>
+      <p>Network Engineer & IT student at Adventist University Of Central Africa (AUCA) specializing in Network Communication Systems. Passionate about Networking, Web Applications, and innovative technology projects.</p>
       <a href="#contact" class="btn">Contact Me</a>
     </div>
   </section>
@@ -179,6 +213,24 @@
       <div class="skill">Cybersecurity</div>
       <div class="skill">Project Management</div>
       <div class="skill">Teamwork</div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Car Rental MIS (KeiSon Drive)</h3>
+        <p>A complete Management Information System for car rentals with booking, admin dashboard, and customer dashboards, built using Advanced Java, MySQL, and PHP for the web front-end.</p>
+      </div>
+      <div class="project-card">
+        <h3>Advanced Java Programming</h3>
+        <p>Developed enterprise-grade applications with Java Swing, RMI, Hibernate, and DAO pattern, implementing complex real-world projects including KeiSon Drive.</p>
+      </div>
+      <div class="project-card">
+        <h3>Networking Project (Cisco Packet Tracer)</h3>
+        <p>Designed and implemented a full network using <strong>172.16.0.0/16</strong> with VLSM subnetting, static routing, and default routing in Cisco Packet Tracer. Successfully configured routers, switches, and PCs for connectivity across multiple subnets.</p>
+      </div>
     </div>
   </section>
 
